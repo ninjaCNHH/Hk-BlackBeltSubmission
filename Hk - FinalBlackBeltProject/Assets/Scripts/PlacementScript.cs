@@ -8,65 +8,87 @@ using UnityEngine.UIElements;
 
 public class PlacementScript : MonoBehaviour
 {
-    public GameObject Tower1; 
+    [Header("Towers Selected")]
+    public GameObject Tower1;
     public GameObject Tower2;
     public GameObject Tower3;
+    private GameObject TowerSelectedForPlacement;
+    bool TowerPlaced = false;
 
-    public bool HoldingTower;
+    [Header("Mouse Position")]
+    public Vector3 worldPosition;
+    Plane plane = new Plane(Vector3.up, 0);
 
-    Vector3 mousePositionOffset;
-
-    public float mouseX; 
-    public float mouseY;
-    public float mouseZ; 
-
-    Vector3 Vector3mousePosition;
-
-
-
+    [Header("Tower Upgrade And Upgrade UI")]
+    public GameObject UpgradeCanvas;
+    public GameObject selectedObject;
+    public GameObject highlightedObject;
+    public LayerMask selectableLayer;
+    RaycastHit hitData;
+    public TowerAttributes towerAttributes; 
 
     // Start is called before the first frame update
     void Start()
     {
-        HoldingTower = false; 
+        TowerPlaced = false;
+
+        UpgradeCanvas.SetActive(false);
+
+        towerAttributes = towerAttributes.GetComponent<TowerAttributes>(); 
     }
 
-    // Update is called once per frame
     void Update()
     {
-        mouseX = Input.mousePosition.x;
-        mouseY = Input.mousePosition.y;
-        mouseZ = Input.mousePosition.z;
-
-        Vector3mousePosition = new Vector3(mouseX, mouseY, mouseZ); 
-    }
-
-    private void FixedUpdate()
-    {
-        if (HoldingTower)
+        float distance;
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (plane.Raycast(ray, out distance))
         {
-            Tower1.transform.position = Input.mousePosition;
+            worldPosition = ray.GetPoint(distance);
         }
 
-        if (HoldingTower && Input.GetMouseButtonDown(0)) 
+        Vector3 WorldPosition = new Vector3(worldPosition.x, worldPosition.y, worldPosition.z);
+
+        if (worldPosition.x > -60 && worldPosition.x < -3)
         {
-            HoldingTower= false;
-            Instantiate(Tower1, Vector3mousePosition    GetMouseWorldPosition, Quaternion.identity);
-            Debug.Log("Tower is placed"); 
+            if (TowerPlaced && Input.GetMouseButtonDown(0))
+            {
+                Instantiate(TowerSelectedForPlacement, WorldPosition, Quaternion.identity);
+                TowerPlaced = false;
+            }
+        }
+
+        if (Physics.Raycast(ray, out hitData, 1000, selectableLayer))
+        {
+            highlightedObject = hitData.transform.gameObject;
+            if (Input.GetMouseButtonDown(0))
+            {
+                selectedObject = hitData.transform.gameObject;
+                UpgradeCanvas.SetActive(true); 
+            }
+        }
+        else
+        {
+            highlightedObject = null;
+            if (Input.GetMouseButtonDown(0))
+            {
+                selectedObject = null;
+                UpgradeCanvas.SetActive(false); 
+            }
         }
     }
 
     public void ButtonPressed()
     {
-        //mousePositionOffset = Tower1.transform.position - GetMouseWorldPosition();
-        Debug.Log("Button pressed");
-        HoldingTower = true; 
+        TowerPlaced = true; 
+        if (TowerPlaced && towerAttributes.MoneyAmount >= 100)
+        {
+            TowerSelectedForPlacement = Tower1;
+            towerAttributes.MoneyAmount -= 100; 
+        } else
+        {
+            TowerPlaced = false; 
+        }
     }
 
-    private Vector3 GetMouseWorldPosition()
-    {
-        Vector3 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition); 
-        pos.y =0f;
-        return pos;
-    }
+
 }

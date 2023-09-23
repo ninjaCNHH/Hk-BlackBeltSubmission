@@ -25,7 +25,8 @@ public class ZombieScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        AllyHealth = 100; 
+        AllyHealth = 100;
+        BaseHealth.text = AllyHealth.ToString(); 
 
         agent = GetComponent<NavMeshAgent>();
         agent.destination = alliedBase.position; 
