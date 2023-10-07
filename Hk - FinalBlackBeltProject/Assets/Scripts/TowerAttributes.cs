@@ -5,15 +5,31 @@ using UnityEngine.UI;
 
 public class TowerAttributes : MonoBehaviour
 {
+    [Header("TowerNumbers")]
     public int MoneyAmount;
-    public Text Money; 
+    public Text MoneyText; 
     public int SellAmount;
-    public Text SellPrice;
-    public PlacementScript placementScript; 
+    public Text SellPriceText;
+    public int UpgradeAmount;
+    public Text UpgradePriceText; 
+    public int AttackAmount;
+    public Text AttackText;
+    public int AttackSpeed;
+    public Text AtkSpeedText;
+    public int Range;
+    public Text RangeAmountText;
+
+    [Header("SpecificFactors")]
+    public GameObject[] Targets;
+    public GameObject Towers;
+    public PlacementScript placementScript;
+    bool sellingTower; 
+    
 
     // Start is called before the first frame update
     void Start()
     {
+        sellingTower = false; 
         placementScript = placementScript.GetComponent<PlacementScript>(); 
         MoneyAmount = 1000;
         SellAmount = 50; 
@@ -22,14 +38,49 @@ public class TowerAttributes : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Money.text = MoneyAmount.ToString();
-        SellPrice.text = SellAmount.ToString(); 
+
+        MoneyText.text = MoneyAmount.ToString();
+        SellPriceText.text = SellAmount.ToString();
+        UpgradePriceText.text = UpgradeAmount.ToString(); 
+        AttackText.text = AttackAmount.ToString();
+        AtkSpeedText.text = AttackSpeed.ToString();
+        RangeAmountText.text = Range.ToString(); 
+        
+        if (placementScript.selectedObject != null)
+        {
+            sellingTower = true; 
+        }
+
+        Targets = GameObject.FindGameObjectsWithTag("Enemy");
+        float minDistance = 1000;
+
+        foreach (GameObject Targets in Targets)
+        {
+            float TargetDistance = Vector3.Distance(transform.position, Targets.transform.position);
+            if (TargetDistance < minDistance)
+            {
+                minDistance = TargetDistance; 
+            }
+        }
     }
 
     public void SellButtonPressed()
     {
-        Destroy(placementScript.selectedObject);
-        MoneyAmount += SellAmount;
-        Debug.Log("Button Is Clicked"); 
+        if (placementScript.selectedObject.CompareTag("Towers") && sellingTower)
+        {
+            Destroy(placementScript.selectedObject);
+            placementScript.UpgradeCanvas.SetActive(false);
+            MoneyAmount += SellAmount;
+            sellingTower = false;
+            Debug.Log("Button Is Clicked");
+            placementScript.CancelButton.SetActive(false); 
+        }
+    }
+
+    public void CancelButton()
+    {
+        placementScript.CancelButton.SetActive(false);
+        placementScript.UpgradeCanvas.SetActive(false); 
+        placementScript.selectedObject = null; 
     }
 }

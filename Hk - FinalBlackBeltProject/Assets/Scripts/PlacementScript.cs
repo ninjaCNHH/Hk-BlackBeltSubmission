@@ -14,12 +14,14 @@ public class PlacementScript : MonoBehaviour
     public GameObject Tower3;
     private GameObject TowerSelectedForPlacement;
     bool TowerPlaced = false;
+    public GameObject ClonedTower; 
 
     [Header("Mouse Position")]
     public Vector3 worldPosition;
     Plane plane = new Plane(Vector3.up, 0);
 
     [Header("Tower Upgrade And Upgrade UI")]
+    public GameObject CancelButton; 
     public GameObject UpgradeCanvas;
     public GameObject selectedObject;
     public GameObject highlightedObject;
@@ -31,6 +33,8 @@ public class PlacementScript : MonoBehaviour
     void Start()
     {
         TowerPlaced = false;
+
+        CancelButton.SetActive(false); 
 
         UpgradeCanvas.SetActive(false);
 
@@ -52,8 +56,9 @@ public class PlacementScript : MonoBehaviour
         {
             if (TowerPlaced && Input.GetMouseButtonDown(0))
             {
-                Instantiate(TowerSelectedForPlacement, WorldPosition, Quaternion.identity);
+                ClonedTower = Instantiate(TowerSelectedForPlacement, WorldPosition, Quaternion.identity);
                 TowerPlaced = false;
+
             }
         }
 
@@ -63,17 +68,14 @@ public class PlacementScript : MonoBehaviour
             if (Input.GetMouseButtonDown(0))
             {
                 selectedObject = hitData.transform.gameObject;
-                UpgradeCanvas.SetActive(true); 
+                CancelButton.SetActive(true);
+                UpgradeCanvas.SetActive(true);
+                Debug.Log("tower is selected");
             }
         }
         else
         {
             highlightedObject = null;
-            if (Input.GetMouseButtonDown(0))
-            {
-                selectedObject = null;
-                UpgradeCanvas.SetActive(false); 
-            }
         }
     }
 
