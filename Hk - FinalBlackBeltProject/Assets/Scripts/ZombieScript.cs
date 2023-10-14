@@ -30,6 +30,7 @@ public class ZombieScript : MonoBehaviour
     void Start()
     {
         AllyHealth = 100;
+        Health = 100; 
 
         agent = GetComponent<NavMeshAgent>();
         agent.destination = alliedBase.position;
@@ -41,6 +42,12 @@ public class ZombieScript : MonoBehaviour
     void Update()
     {
         BaseHealth.text = AllyHealth.ToString();
+
+        if (Health<= 0)
+        {
+            Destroy(gameObject); 
+        }
+
     }
 
     private void OnTriggerEnter(Collider other)
