@@ -27,11 +27,22 @@ public class PlacementScript : MonoBehaviour
     public GameObject highlightedObject;
     public LayerMask selectableLayer;
     RaycastHit hitData;
-    public TowerAttributes towerAttributes; 
+    public TowerAttributes towerAttributes;
+    public int MoneyAmount;
+    public Text MoneyText;
+    public int SellAmount;
+    public Text SellPriceText;
+    bool sellingTower;
 
     // Start is called before the first frame update
     void Start()
     {
+        MoneyAmount = 1000;
+        SellAmount = 50;
+        sellingTower = false;
+        SellPriceText.text = SellAmount.ToString();
+
+
         TowerPlaced = false;
 
         CancelButton.SetActive(false); 
@@ -77,20 +88,47 @@ public class PlacementScript : MonoBehaviour
         {
             highlightedObject = null;
         }
+
+        if (selectedObject != null)
+        {
+            sellingTower = true;
+        }
     }
 
     public void ButtonPressed()
     {
         TowerPlaced = true; 
-        if (TowerPlaced && towerAttributes.MoneyAmount >= 100)
+        if (TowerPlaced && MoneyAmount >= 100)
         {
             TowerSelectedForPlacement = Tower1;
-            towerAttributes.MoneyAmount -= 100; 
-        } else
+            MoneyAmount -= 100;
+            MoneyText.text = MoneyAmount.ToString();
+        }
+        else
         {
             TowerPlaced = false; 
         }
     }
 
+    public void SellButtonPressed()
+    {
+        if (selectedObject.CompareTag("Towers") && sellingTower)
+        {
+            Destroy(selectedObject);
+            UpgradeCanvas.SetActive(false);
+            MoneyAmount += SellAmount;
+            MoneyText.text = MoneyAmount.ToString(); 
+            sellingTower = false;
+            Debug.Log("Button Is Clicked");
+            CancelButton.SetActive(false);
+        }
+    }
+
+    public void CancelButtonFunction()
+    {
+        CancelButton.SetActive(false);
+        UpgradeCanvas.SetActive(false);
+        selectedObject = null;
+    }
 
 }

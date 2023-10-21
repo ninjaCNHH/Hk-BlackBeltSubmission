@@ -7,7 +7,8 @@ using UnityEngine.UI;
 
 public class ZombieScript : MonoBehaviour
 {
-    public GameObject Zombie; 
+    public GameObject Zombie;
+    public ZombieExplosionScript ZombieExplosionScript; 
 
     [Header("Zombie Traits")] 
     public int Health;
@@ -30,13 +31,16 @@ public class ZombieScript : MonoBehaviour
     void Start()
     {
         AllyHealth = 100;
-        Health = 100; 
+        
+        Health = 100;
 
         agent = GetComponent<NavMeshAgent>();
         agent.destination = alliedBase.position;
         agent.speed = Speed;
         agent.angularSpeed = AngularSpeed;
-        agent.acceleration = Acceleration; 
+        agent.acceleration = Acceleration;
+
+        ZombieExplosionScript = gameObject.GetComponent<ZombieExplosionScript>(); 
     }
     // Update is called once per frame
     void Update()
@@ -45,7 +49,8 @@ public class ZombieScript : MonoBehaviour
 
         if (Health<= 0)
         {
-            Destroy(gameObject); 
+            Destroy(gameObject);
+            ZombieExplosionScript.ZombieDeathAnimationStart(); 
         }
 
     }
