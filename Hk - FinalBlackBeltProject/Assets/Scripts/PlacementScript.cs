@@ -33,6 +33,7 @@ public class PlacementScript : MonoBehaviour
     public int SellAmount;
     public Text SellPriceText;
     bool sellingTower;
+    bool ButtonClicked; 
 
     // Start is called before the first frame update
     void Start()
@@ -44,6 +45,7 @@ public class PlacementScript : MonoBehaviour
 
 
         TowerPlaced = false;
+        ButtonClicked = true; 
 
         CancelButton.SetActive(false); 
 
@@ -54,6 +56,9 @@ public class PlacementScript : MonoBehaviour
 
     void Update()
     {
+        MoneyText.text = MoneyAmount.ToString();
+
+
         float distance;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (plane.Raycast(ray, out distance))
@@ -69,6 +74,7 @@ public class PlacementScript : MonoBehaviour
             {
                 ClonedTower = Instantiate(TowerSelectedForPlacement, WorldPosition, Quaternion.identity);
                 TowerPlaced = false;
+                ButtonClicked = true; 
 
             }
         }
@@ -97,18 +103,20 @@ public class PlacementScript : MonoBehaviour
 
     public void ButtonPressed()
     {
-        TowerPlaced = true; 
-        if (TowerPlaced && MoneyAmount >= 100)
+        TowerPlaced = true;
+        if (TowerPlaced && MoneyAmount >= 100 && ButtonClicked)
         {
             TowerSelectedForPlacement = Tower1;
             MoneyAmount -= 100;
             MoneyText.text = MoneyAmount.ToString();
+            ButtonClicked = false; 
         }
-        else
+        else 
         {
             TowerPlaced = false; 
         }
     }
+
 
     public void SellButtonPressed()
     {

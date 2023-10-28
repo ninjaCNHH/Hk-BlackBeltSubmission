@@ -20,7 +20,6 @@ public class TowerAttributes : MonoBehaviour
     public GameObject Enemy; 
     public PlacementScript placementScript;
     public ZombieScript ZombieScript;
-    public ZombieExplosionScript ZombieExplosionScript;
     
 
     // Start is called before the first frame update
@@ -29,9 +28,9 @@ public class TowerAttributes : MonoBehaviour
         placementScript = placementScript.GetComponent<PlacementScript>();
         AttackAmount = 10;
         AttackSpeed = 1;
-        ZombieExplosionScript = Enemy.GetComponent<ZombieExplosionScript>();
-        ZombieExplosionScript.ZombieHitAnimationStop(); 
-        StartCoroutine(BulletAttacking()); 
+        StartCoroutine(BulletAttacking());
+
+        ZombieScript.ZombieHitAnimation.Stop();
     }
 
     // Update is called once per frame
@@ -63,9 +62,8 @@ public class TowerAttributes : MonoBehaviour
         transform.LookAt(Enemy.transform.position);
         Debug.Log("Towerislooking");
         ZombieScript.Health -= AttackAmount;
-        ZombieExplosionScript.ZombieHitAnimationStart(); 
+        ZombieScript.ZombieHitAnimationStart();  
         yield return new WaitForSeconds(AttackSpeed);
-        ZombieExplosionScript.ZombieHitAnimationStop(); 
         StartCoroutine(BulletAttacking());
     }
 }
