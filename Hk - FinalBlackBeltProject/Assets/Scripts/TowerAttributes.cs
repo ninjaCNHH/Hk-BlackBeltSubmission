@@ -27,16 +27,22 @@ public class TowerAttributes : MonoBehaviour
     {
         placementScript = placementScript.GetComponent<PlacementScript>();
         AttackAmount = 10;
-        AttackSpeed = 1;
+        AttackSpeed = 10;
         StartCoroutine(BulletAttacking());
+        if (ZombieScript)
+        {
+            ZombieScript.ZombieHitAnimation.Stop();
+        }
 
-        ZombieScript.ZombieHitAnimation.Stop();
     }
 
     // Update is called once per frame
     void Update()
     {
-        ZombieScript = Enemy.GetComponent<ZombieScript>();
+        if (Enemy)
+        {
+            ZombieScript = Enemy.GetComponent<ZombieScript>();
+        }
         AttackText.text = AttackAmount.ToString();
         AtkSpeedText.text = AttackSpeed.ToString();
         RangeAmountText.text = Range.ToString();
@@ -49,7 +55,7 @@ public class TowerAttributes : MonoBehaviour
             if (TargetDistance < minDistance)
             {
                 minDistance = TargetDistance;
-                Enemy = Targets;
+                    Enemy = Targets; 
             }
         }
 
@@ -58,12 +64,14 @@ public class TowerAttributes : MonoBehaviour
     IEnumerator BulletAttacking()
     {
         yield return new WaitForSeconds(4f); 
-        
-        transform.LookAt(Enemy.transform.position);
-        Debug.Log("Towerislooking");
-        ZombieScript.Health -= AttackAmount;
-        ZombieScript.ZombieHitAnimationStart();  
-        yield return new WaitForSeconds(AttackSpeed);
-        StartCoroutine(BulletAttacking());
+        if (Enemy)
+        {
+            transform.LookAt(Enemy.transform.position);
+            Debug.Log("Towerislooking");
+            ZombieScript.Health -= AttackAmount;
+            ZombieScript.ZombieHitAnimationStart();
+            yield return new WaitForSeconds(AttackSpeed);
+            StartCoroutine(BulletAttacking());
+        }
     }
 }

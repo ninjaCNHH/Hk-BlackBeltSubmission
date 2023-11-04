@@ -18,8 +18,8 @@ public class ZombieScript : MonoBehaviour
 
     [Header("AI Movement")]
     public NavMeshAgent agent;
-    public Transform alliedBase;
-    public Animation ZombieWalk;
+    public GameObject alliedBase;
+    public Animation ZombieWalk; 
 
     [Header("UI")]
     public int AllyHealth; 
@@ -31,11 +31,13 @@ public class ZombieScript : MonoBehaviour
     void Start()
     {
         AllyHealth = 100;
-        
+        BaseHealth = GameObject.FindGameObjectWithTag("Health").GetComponent<Text>();
         Health = 30;
 
+        alliedBase = GameObject.FindGameObjectWithTag("Base"); 
+
         agent = GetComponent<NavMeshAgent>();
-        agent.destination = alliedBase.position;
+        agent.destination = alliedBase.transform.position;
         agent.speed = Speed;
         agent.angularSpeed = AngularSpeed;
         agent.acceleration = Acceleration;
@@ -58,8 +60,8 @@ public class ZombieScript : MonoBehaviour
         if (other.CompareTag("Base"))
         {
             AllyHealth -= 20;
-            Destroy(Zombie);
-            
+            Destroy(gameObject);
+            BaseHealth.text = AllyHealth.ToString();
         }
     }
 

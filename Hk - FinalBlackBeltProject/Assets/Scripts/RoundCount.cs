@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using JetBrains.Annotations;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -6,13 +7,14 @@ using UnityEngine.VFX;
 
 public class RoundCount : MonoBehaviour
 {
-    public ZombieScript ZombieScirpt;
+    public ZombieScript ZombieScirpt; 
     public Vector3 OriginalSpawnLocation;
     bool Round1; 
     bool Round2;
     bool Round3;
     bool Round4;
     bool Round5;
+    bool CorutineNormalZombieFinished = true; 
     // Start is called before the first frame update
     void Start()
     {
@@ -44,13 +46,17 @@ public class RoundCount : MonoBehaviour
     }
 
     IEnumerator SpawnNormalZombie()
-    {
-        yield return new WaitForSeconds(4f); 
-        Instantiate(ZombieScirpt.Zombie, OriginalSpawnLocation, Quaternion.identity); 
-        StartCoroutine(SpawnNormalZombie());
+    { 
+        yield return new WaitForSeconds(4f);
+        Instantiate(ZombieScirpt.Zombie, OriginalSpawnLocation, Quaternion.identity);
+        if (CorutineNormalZombieFinished == true)
+        {
+           StartCoroutine(SpawnNormalZombie());
+        }
     }
     public void StopNormalZombieSpawn()
     {
-        StopCoroutine(SpawnNormalZombie());
+        CorutineNormalZombieFinished = false;
+        Debug.Log("Corutine Stopped");
     }    
 }

@@ -111,7 +111,7 @@ public class PlacementScript : MonoBehaviour
             MoneyText.text = MoneyAmount.ToString();
             ButtonClicked = false; 
         }
-        else 
+        else if (ButtonClicked == true)
         {
             TowerPlaced = false; 
         }

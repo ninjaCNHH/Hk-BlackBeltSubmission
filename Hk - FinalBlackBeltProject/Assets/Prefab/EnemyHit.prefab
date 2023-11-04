@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3290408607897705358}
   m_Layer: 0
   m_Name: EnemyHit
-  m_TagString: Untagged
+  m_TagString: Health
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
