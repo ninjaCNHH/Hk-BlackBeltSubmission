@@ -19,19 +19,19 @@ public class ZombieScript : MonoBehaviour
     [Header("AI Movement")]
     public NavMeshAgent agent;
     public GameObject alliedBase;
-    public Animation ZombieWalk; 
+    public Animation ZombieWalk;
 
     [Header("UI")]
-    public int AllyHealth; 
-    public Text BaseHealth;
+    public BaseHealth BaseHealthScript; 
     public ParticleSystem ZombieHitAnimation;
-    public ParticleSystem ZombieDeathAnimation; 
+    public ParticleSystem ZombieDeathAnimation;
+    public PlacementScript PlacementScript;
 
     // Start is called before the first frame update
     void Start()
     {
-        AllyHealth = 100;
-        BaseHealth = GameObject.FindGameObjectWithTag("Health").GetComponent<Text>();
+        PlacementScript = PlacementScript.GetComponent<PlacementScript>();
+
         Health = 30;
 
         alliedBase = GameObject.FindGameObjectWithTag("Base"); 
@@ -46,24 +46,15 @@ public class ZombieScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        BaseHealth.text = AllyHealth.ToString();
-
-        if (Health<= 0)
+        if (Health <= 0)
         {
+            PlacementScript.MoneyAmount += 200; 
             Instantiate(ZombieDeathAnimation, Zombie.transform.position, Zombie.transform.rotation); 
             Destroy(gameObject); 
         }
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Base"))
-        {
-            AllyHealth -= 20;
-            Destroy(gameObject);
-            BaseHealth.text = AllyHealth.ToString();
-        }
-    }
+
 
     public void ZombieDeathAnimationStart()
     {

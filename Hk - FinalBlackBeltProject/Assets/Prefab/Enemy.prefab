@@ -129,17 +129,20 @@ MonoBehaviour:
   Zombie: {fileID: 1092522391101529648}
   Health: -10
   Defence: 0
-  Speed: 10
+  Speed: 3
   AngularSpeed: 250
   Acceleration: 10
   agent: {fileID: 1092522391101529641}
-  alliedBase: {fileID: 0}
-  ZombieWalk: {fileID: 0}
-  AllyHealth: 0
-  BaseHealth: {fileID: 6083053780314223175, guid: b7b67bb6e4e5457429ee23acb81c9ff6,
+  alliedBase: {fileID: 7330582605210554392, guid: 4e11942ede8d14645821fd9613dabe43,
     type: 3}
+  ZombieWalk: {fileID: 0}
+  BaseHealthScript: {fileID: 0}
   ZombieHitAnimation: {fileID: 927433563241602607}
   ZombieDeathAnimation: {fileID: 8740807980215460348, guid: a0aa8a045b564fd418336d3986edb6ea,
+    type: 3}
+  PlacementScript: {fileID: 2026604345025822444, guid: 0fa7f6a3bf6324447b99f05adb55a681,
+    type: 3}
+  ImportantScripts: {fileID: 2026604345025822445, guid: 0fa7f6a3bf6324447b99f05adb55a681,
     type: 3}
 --- !u!195 &1092522391101529641
 NavMeshAgent:
