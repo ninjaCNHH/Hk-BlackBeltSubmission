@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\BaseHealth.cs" />
+    <Compile Include="Assets\Scripts\Menu.cs" />
     <Compile Include="Assets\Scripts\ParticleSystemClear.cs" />
     <Compile Include="Assets\Scripts\PlacementScript.cs" />
     <Compile Include="Assets\Scripts\RoundCount.cs" />

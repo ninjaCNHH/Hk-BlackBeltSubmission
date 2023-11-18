@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.Tracing;
 using UnityEditor;
@@ -56,6 +57,7 @@ public class PlacementScript : MonoBehaviour
 
     void Update()
     {
+        
         MoneyText.text = MoneyAmount.ToString();
 
 
@@ -87,7 +89,7 @@ public class PlacementScript : MonoBehaviour
                 selectedObject = hitData.transform.gameObject;
                 CancelButton.SetActive(true);
                 UpgradeCanvas.SetActive(true);
-                Debug.Log("tower is selected");
+
             }
         }
         else

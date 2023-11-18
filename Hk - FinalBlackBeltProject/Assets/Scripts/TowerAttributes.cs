@@ -67,7 +67,7 @@ public class TowerAttributes : MonoBehaviour
         if (Enemy)
         {
             transform.LookAt(Enemy.transform.position);
-            Debug.Log("Towerislooking");
+
             ZombieScript.Health -= AttackAmount;
             ZombieScript.ZombieHitAnimationStart();
             yield return new WaitForSeconds(AttackSpeed);

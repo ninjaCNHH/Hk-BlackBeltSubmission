@@ -4,5 +4,14 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Zombie Defense Beta/Title&Menu.unity
+    guid: a29e5792dc3fe0a4d8c3e7bffc976c93
+  - enabled: 1
+    path: Assets/Scenes/Zombie Defense Beta/Zombie Defense Beta.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Scenes/Zombie Defense Beta/LoseScreen.unity
+    guid: c2b8ef20aeb5e4f46b533cfb4ff2ee35
   m_configObjects: {}

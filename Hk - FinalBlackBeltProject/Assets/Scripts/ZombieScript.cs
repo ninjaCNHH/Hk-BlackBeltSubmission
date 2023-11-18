@@ -25,12 +25,10 @@ public class ZombieScript : MonoBehaviour
     public BaseHealth BaseHealthScript; 
     public ParticleSystem ZombieHitAnimation;
     public ParticleSystem ZombieDeathAnimation;
-    public PlacementScript PlacementScript;
 
     // Start is called before the first frame update
     void Start()
     {
-        PlacementScript = PlacementScript.GetComponent<PlacementScript>();
 
         Health = 30;
 
@@ -46,11 +44,12 @@ public class ZombieScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         if (Health <= 0)
         {
-            PlacementScript.MoneyAmount += 200; 
+            GameObject.Find("Important Scripts").GetComponent<PlacementScript>().MoneyAmount += 50;
             Instantiate(ZombieDeathAnimation, Zombie.transform.position, Zombie.transform.rotation); 
-            Destroy(gameObject); 
+            Destroy(gameObject);
         }
     }
 
@@ -60,13 +59,13 @@ public class ZombieScript : MonoBehaviour
     {
         ZombieDeathAnimation.transform.position = gameObject.transform.position;
         ZombieDeathAnimation.Play();
-        Debug.Log("DeathAnimationPlay");
+
     }
 
     public void ZombieHitAnimationStart()
     {
         ZombieHitAnimation.transform.position = gameObject.transform.position;
         ZombieHitAnimation.Play();
-        Debug.Log("HitAnimationPlay");
+
     }
 }
