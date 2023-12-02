@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement; 
 
 public class BaseHealth : MonoBehaviour
 {
@@ -18,6 +19,11 @@ public class BaseHealth : MonoBehaviour
     void Update()
     {
         BaseHP.text = AllyHealth.ToString();
+
+        if (AllyHealth <= 0)
+        {
+            SceneManager.LoadScene(2); 
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -26,7 +32,6 @@ public class BaseHealth : MonoBehaviour
         {
             AllyHealth -= 20; 
             Destroy(other.gameObject);
-
         }
     }
 }

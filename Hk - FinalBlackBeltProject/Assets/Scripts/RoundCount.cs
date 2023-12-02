@@ -10,7 +10,8 @@ using UnityEngine.VFX;
 public class RoundCount : MonoBehaviour
 {
     public ZombieScript ZombieScirpt;
-    public GameObject FastZombie; 
+    public GameObject FastZombie;
+    public GameObject HeavyZombie; 
     public Text RoundText;
     public int RoundNumber;
     public int WaveNumber; 
@@ -18,6 +19,7 @@ public class RoundCount : MonoBehaviour
     bool NewRoundStarts; 
     bool CorutineNormalZombieFinished = true; 
     bool CorutineFastZombieFinished = true;
+    bool CorutineHeavyZombieFinished = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -53,19 +55,47 @@ public class RoundCount : MonoBehaviour
             RoundNumber = 2;
             RoundText.text = RoundNumber.ToString();
             NewRoundStarts= false;
-            Debug.Log("Round 2 Has Started"); 
 
         }
 
         if (WaveNumber == 3 && NewRoundStarts)
         {
-            Debug.Log("WAVE 3 BEGINS"); 
+            StartCoroutine(SpawnNormalZombie());
+            Invoke("StopNormalZombieSpawn", 10f);
+            StartCoroutine(SpawnFastZombie());
+            Invoke("StopFastZombieSpawn", 30f);
+            Invoke("Round3Finish", 30f);
+            RoundNumber = 3;
+            RoundText.text = RoundNumber.ToString();
+            NewRoundStarts = false;
+        }
+
+        if (WaveNumber == 4 && NewRoundStarts)
+        {
+            StartCoroutine(SpawnFastZombie());
+            Invoke("StopFastZombieSpawn", 40f);
+            Invoke("Round4Finish", 40f);
+            RoundNumber = 4;
+            RoundText.text = RoundNumber.ToString();
+            NewRoundStarts = false;
+        }
+
+        if (WaveNumber == 5 && NewRoundStarts)
+        {
+            StartCoroutine(SpawnFastZombie());
+            Invoke("StopFastZombieSpawn", 10f);
+            StartCoroutine(SpawnHeavyZombie());
+            Invoke("StopHeavyZombieSpawn", 30f); 
+            Invoke("Round5Finish", 30f);
+            RoundNumber = 5;
+            RoundText.text = RoundNumber.ToString();
+            NewRoundStarts = false;
         }
     }
 
     IEnumerator SpawnNormalZombie()
     { 
-        yield return new WaitForSeconds(4f);
+        yield return new WaitForSeconds(2f);
         Instantiate(ZombieScirpt.Zombie, OriginalSpawnLocation, Quaternion.identity);
         if (CorutineNormalZombieFinished == true)
         {
@@ -75,11 +105,21 @@ public class RoundCount : MonoBehaviour
 
     IEnumerator SpawnFastZombie()
     {
-        yield return new WaitForSeconds(4f);
+        yield return new WaitForSeconds(2f);
         Instantiate(FastZombie, OriginalSpawnLocation, Quaternion.identity);
         if (CorutineFastZombieFinished == true)
         {
             StartCoroutine(SpawnFastZombie());
+        }
+    }
+
+    IEnumerator SpawnHeavyZombie()
+    {
+        yield return new WaitForSeconds(2f);
+        Instantiate(HeavyZombie, OriginalSpawnLocation, Quaternion.identity);
+        if (CorutineHeavyZombieFinished == true)
+        {
+            StartCoroutine(SpawnHeavyZombie());
         }
     }
 
@@ -94,6 +134,11 @@ public class RoundCount : MonoBehaviour
         CorutineFastZombieFinished = false;
     }
 
+    public void StopHeavyZombieSpawn()
+    {
+        CorutineHeavyZombieFinished = false;
+    }
+
     public void Round1Finish()
     {
         WaveNumber = 2;
@@ -104,5 +149,53 @@ public class RoundCount : MonoBehaviour
     {
         WaveNumber = 3;
         NewRoundStarts = true; 
+    }
+
+    public void Round3Finish()
+    {
+        WaveNumber = 4;
+        NewRoundStarts = true;
+    }
+
+    public void Round4Finish()
+    {
+        WaveNumber = 5;
+        NewRoundStarts = true;
+    }
+
+    public void Round5Finish()
+    {
+        WaveNumber = 6;
+        NewRoundStarts = true;
+    }
+
+    public void Round6Finish()
+    {
+        WaveNumber = 7;
+        NewRoundStarts = true;
+    }
+
+    public void Round7Finish()
+    {
+        WaveNumber = 8;
+        NewRoundStarts = true;
+    }
+
+    public void Round8Finish()
+    {
+        WaveNumber = 9;
+        NewRoundStarts = true;
+    }
+
+    public void Round9Finish()
+    {
+        WaveNumber = 10;
+        NewRoundStarts = true;
+    }
+
+    public void Round10Finish()
+    {
+        WaveNumber = 11;
+        NewRoundStarts = true;
     }
 }

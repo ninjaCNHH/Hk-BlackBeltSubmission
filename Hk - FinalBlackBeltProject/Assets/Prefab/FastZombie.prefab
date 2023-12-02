@@ -127,7 +127,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Zombie: {fileID: 3304577220902168935}
-  Health: 0
+  Health: 20
   Defence: 0
   Speed: 8
   AngularSpeed: 250
@@ -139,10 +139,6 @@ MonoBehaviour:
   BaseHealthScript: {fileID: 0}
   ZombieHitAnimation: {fileID: 3326959198750026104}
   ZombieDeathAnimation: {fileID: 8740807980215460348, guid: a0aa8a045b564fd418336d3986edb6ea,
-    type: 3}
-  PlacementScript: {fileID: 2026604345025822444, guid: 0fa7f6a3bf6324447b99f05adb55a681,
-    type: 3}
-  ImportantScripts: {fileID: 2026604345025822445, guid: 0fa7f6a3bf6324447b99f05adb55a681,
     type: 3}
 --- !u!195 &3304577220902168958
 NavMeshAgent:

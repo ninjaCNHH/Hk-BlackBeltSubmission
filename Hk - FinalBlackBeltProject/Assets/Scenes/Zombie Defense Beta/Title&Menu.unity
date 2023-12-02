@@ -629,7 +629,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -35.000008, y: -130}
+  m_AnchoredPosition: {x: -34, y: -130}
   m_SizeDelta: {x: 752.43164, y: 33.804893}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &610153558
@@ -664,7 +664,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 5. Most Importantly Have Fun Good Luck!!
+  m_Text: 5. Try to reach the highest level! Most Importantly Good Luck and Have
+    Fun
 --- !u!222 &610153559
 CanvasRenderer:
   m_ObjectHideFlags: 0

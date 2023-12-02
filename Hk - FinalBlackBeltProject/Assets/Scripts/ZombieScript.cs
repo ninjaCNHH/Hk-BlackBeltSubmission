@@ -30,8 +30,6 @@ public class ZombieScript : MonoBehaviour
     void Start()
     {
 
-        Health = 30;
-
         alliedBase = GameObject.FindGameObjectWithTag("Base"); 
 
         agent = GetComponent<NavMeshAgent>();
