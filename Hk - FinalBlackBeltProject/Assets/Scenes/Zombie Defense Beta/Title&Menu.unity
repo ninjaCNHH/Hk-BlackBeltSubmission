@@ -664,8 +664,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 5. Try to reach the highest level! Most Importantly Good Luck and Have
-    Fun
+  m_Text: 5. Try to reach level 10! Most Importantly Good Luck and Have Fun
 --- !u!222 &610153559
 CanvasRenderer:
   m_ObjectHideFlags: 0

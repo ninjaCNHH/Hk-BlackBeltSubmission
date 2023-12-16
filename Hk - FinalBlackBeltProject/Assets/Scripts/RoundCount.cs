@@ -11,7 +11,10 @@ public class RoundCount : MonoBehaviour
 {
     public ZombieScript ZombieScirpt;
     public GameObject FastZombie;
-    public GameObject HeavyZombie; 
+    public GameObject HeavyZombie;
+    public GameObject MiniBoss;
+    public GameObject FastHeavy;
+    public GameObject BigBoss; 
     public Text RoundText;
     public int RoundNumber;
     public int WaveNumber; 
@@ -20,6 +23,9 @@ public class RoundCount : MonoBehaviour
     bool CorutineNormalZombieFinished = true; 
     bool CorutineFastZombieFinished = true;
     bool CorutineHeavyZombieFinished = true;
+    bool CourtineMiniBossFinished = true;
+    bool CourtineFastHeavyFinished = true; 
+    bool CorutineBigBossFinished = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -38,8 +44,8 @@ public class RoundCount : MonoBehaviour
         if (WaveNumber == 1 && NewRoundStarts)
         {
             StartCoroutine(SpawnNormalZombie());  
-            Invoke("StopNormalZombieSpawn" , 20f);
-            Invoke("Round1Finish", 20f);
+            Invoke("StopNormalZombieSpawn" , 20f); 
+            Invoke("Round1Finish", 20f); 
             RoundNumber = 1; 
             RoundText.text = RoundNumber.ToString(); 
             NewRoundStarts= false;
@@ -82,12 +88,77 @@ public class RoundCount : MonoBehaviour
 
         if (WaveNumber == 5 && NewRoundStarts)
         {
-            StartCoroutine(SpawnFastZombie());
-            Invoke("StopFastZombieSpawn", 10f);
-            StartCoroutine(SpawnHeavyZombie());
+            StartCoroutine(SpawnFastZombie()); 
+            Invoke("StopFastZombieSpawn", 10f);  
+            StartCoroutine(SpawnHeavyZombie()); 
             Invoke("StopHeavyZombieSpawn", 30f); 
             Invoke("Round5Finish", 30f);
             RoundNumber = 5;
+            RoundText.text = RoundNumber.ToString();
+            NewRoundStarts = false;
+        }
+
+        if (WaveNumber == 6 && NewRoundStarts)
+        {
+
+            StartCoroutine(SpawnFastZombie());
+            Invoke("StopFastZombieSpawn", 30f);
+            StartCoroutine(SpawnMiniBoss());
+            Invoke("StopMiniBossSpawn", 5f);
+            Invoke("Round6Finish", 30f);
+            RoundNumber = 6;
+            RoundText.text = RoundNumber.ToString();
+            NewRoundStarts = false;
+        }
+
+        if (WaveNumber == 7 && NewRoundStarts)
+        {
+            StartCoroutine(SpawnHeavyZombie());
+            Invoke("StopHeavyZombieSpawn", 20f);
+            StartCoroutine(SpawnFastZombie());
+            Invoke("StopFastZombieSpawn", 15f);
+            StartCoroutine(SpawnMiniBoss());
+            Invoke("StopMiniBossSpawn", 10f);
+            Invoke("Round7Finish", 30f);
+            RoundNumber = 7;
+            RoundText.text = RoundNumber.ToString();
+            NewRoundStarts = false;
+        }
+
+        if (WaveNumber == 8 && NewRoundStarts)
+        {
+            StartCoroutine(SpawnMiniBoss());
+            Invoke("StopMiniBossSpawn", 10f);
+            StartCoroutine(SpawnFastHeavy());
+            Invoke("StopFastHeavySpawn", 20f);
+            Invoke("Round8Finish", 30f);
+            RoundNumber = 8;
+            RoundText.text = RoundNumber.ToString();
+            NewRoundStarts = false;
+        }
+
+        if (WaveNumber == 9 && NewRoundStarts)
+        {
+            StartCoroutine(SpawnMiniBoss());
+            Invoke("StopMiniBossSpawn", 15f);
+            StartCoroutine(SpawnFastHeavy());
+            Invoke("StopFastHeavySpawn", 30f);
+            Invoke("Round9Finish", 35f);
+            RoundNumber = 9;
+            RoundText.text = RoundNumber.ToString();
+            NewRoundStarts = false;
+        }
+
+        if (WaveNumber == 10 && NewRoundStarts)
+        {
+            StartCoroutine(SpawnMiniBoss());
+            Invoke("StopMiniBossSpawn", 15f);
+            StartCoroutine(SpawnBigBoss());
+            Invoke("StopBigBossSpawn", 2f);
+            StartCoroutine(SpawnFastHeavy());
+            Invoke("StopFastHeavySpawn", 20f);
+            Invoke("Round10Finish", 30f);
+            RoundNumber = 10;
             RoundText.text = RoundNumber.ToString();
             NewRoundStarts = false;
         }
@@ -123,6 +194,36 @@ public class RoundCount : MonoBehaviour
         }
     }
 
+    IEnumerator SpawnMiniBoss()
+    {
+        yield return new WaitForSeconds(2f);
+        Instantiate(MiniBoss, OriginalSpawnLocation, Quaternion.identity);
+        if (CourtineMiniBossFinished == true)
+        {
+            StartCoroutine(SpawnMiniBoss());
+        }
+    }
+
+    IEnumerator SpawnFastHeavy()
+    {
+        yield return new WaitForSeconds(2f);
+        Instantiate(FastHeavy, OriginalSpawnLocation, Quaternion.identity);
+        if (CourtineFastHeavyFinished == true)
+        {
+            StartCoroutine(SpawnFastHeavy());
+        }
+    }
+
+    IEnumerator SpawnBigBoss()
+    {
+        yield return new WaitForSeconds(2f);
+        Instantiate(BigBoss, OriginalSpawnLocation, Quaternion.identity);
+        if (CorutineBigBossFinished == true)
+        {
+            StartCoroutine(SpawnBigBoss());
+        }
+    }
+
     public void StopNormalZombieSpawn()
     {
         CorutineNormalZombieFinished = false;
@@ -137,6 +238,21 @@ public class RoundCount : MonoBehaviour
     public void StopHeavyZombieSpawn()
     {
         CorutineHeavyZombieFinished = false;
+    }
+
+    public void StopMiniBossSpawn()
+    {
+        CourtineMiniBossFinished = false;
+    }
+
+    public void StopFastHeavySpawn()
+    {
+        CourtineFastHeavyFinished = false;
+    }
+
+    public void StopBigBossSpawn()
+    {
+        CorutineBigBossFinished = false;
     }
 
     public void Round1Finish()
