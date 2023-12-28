@@ -12,22 +12,25 @@ public class TowerAttributes : MonoBehaviour
     public Text AttackText;
     public float AttackSpeed;
     public Text AtkSpeedText;
-    public int Range;
-    public Text RangeAmountText;
+    public int Red = 0;
+    public int Green = 255;
+    public int Blue = 255; 
 
     [Header("SpecificFactors")]
     public GameObject[] Targets;
-    public GameObject Enemy; 
-    public PlacementScript placementScript;
+    public GameObject Enemy;
+    public GameObject PlaceMentScript; 
+    private PlacementScript placementScript;
     public ZombieScript ZombieScript;
     
 
     // Start is called before the first frame update
     void Start()
     {
-        placementScript = placementScript.GetComponent<PlacementScript>();
+        placementScript = PlaceMentScript.GetComponent<PlacementScript>();
         AttackAmount = 10;
         AttackSpeed = 10;
+        UpgradeAmount = 50; 
         StartCoroutine(BulletAttacking());
         if (ZombieScript)
         {
@@ -45,7 +48,7 @@ public class TowerAttributes : MonoBehaviour
         }
         AttackText.text = AttackAmount.ToString();
         AtkSpeedText.text = AttackSpeed.ToString();
-        RangeAmountText.text = Range.ToString();
+        UpgradePriceText.text = UpgradeAmount.ToString(); 
 
         Targets = GameObject.FindGameObjectsWithTag("Enemy");
         float minDistance = 1000;
@@ -72,6 +75,19 @@ public class TowerAttributes : MonoBehaviour
             ZombieScript.ZombieHitAnimationStart();
             yield return new WaitForSeconds(AttackSpeed);
             StartCoroutine(BulletAttacking());
+        }
+    }
+
+    public void UpgradeButtonPressed()
+    {
+        if (placementScript.MoneyAmount > UpgradeAmount)
+        {
+            AttackAmount += 5;
+            AttackSpeed -= 2;
+            placementScript.MoneyAmount -= UpgradeAmount;
+            UpgradeAmount += 200;
+            placementScript.selectedObject.GetComponent<Renderer>().material.color = new Color(Red,
+                Green -= 50, Blue -= 50);
         }
     }
 }

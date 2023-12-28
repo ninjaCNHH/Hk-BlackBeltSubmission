@@ -11,8 +11,6 @@ public class PlacementScript : MonoBehaviour
 {
     [Header("Towers Selected")]
     public GameObject Tower1;
-    public GameObject Tower2;
-    public GameObject Tower3;
     private GameObject TowerSelectedForPlacement;
     bool TowerPlaced = false;
     public GameObject ClonedTower; 
@@ -28,7 +26,6 @@ public class PlacementScript : MonoBehaviour
     public GameObject highlightedObject;
     public LayerMask selectableLayer;
     RaycastHit hitData;
-    public TowerAttributes towerAttributes;
     public int MoneyAmount;
     public Text MoneyText;
     public int SellAmount;
@@ -51,13 +48,10 @@ public class PlacementScript : MonoBehaviour
         CancelButton.SetActive(false); 
 
         UpgradeCanvas.SetActive(false);
-
-        towerAttributes = towerAttributes.GetComponent<TowerAttributes>(); 
     }
 
     void Update()
     {
-        
         MoneyText.text = MoneyAmount.ToString();
 
 
@@ -127,7 +121,7 @@ public class PlacementScript : MonoBehaviour
             Destroy(selectedObject);
             UpgradeCanvas.SetActive(false);
             MoneyAmount += SellAmount;
-            MoneyText.text = MoneyAmount.ToString(); 
+            MoneyText.text = MoneyAmount.ToString();
             sellingTower = false;
             Debug.Log("Button Is Clicked");
             CancelButton.SetActive(false);
