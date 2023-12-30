@@ -156,7 +156,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 231.20001, y: 139.4}
+  m_AnchoredPosition: {x: 198.5, y: 139.4}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &8558216
@@ -253,7 +253,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 232.79999, y: 100}
+  m_AnchoredPosition: {x: 200.09998, y: 100}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &81249009
@@ -1169,7 +1169,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 232, y: 78}
+  m_AnchoredPosition: {x: 199.29999, y: 78}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &479969840
@@ -1443,11 +1443,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UpgradeAmount: 0
-  UpgradePriceText: {fileID: 95200255}
   AttackAmount: 0
-  AttackText: {fileID: 477510786}
   AttackSpeed: 0
-  AtkSpeedText: {fileID: 178671088}
   Red: 0
   Green: 255
   Blue: 255
@@ -2137,7 +2134,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 44.5, y: 15}
+  m_AnchoredPosition: {x: 44, y: 15}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1139639052
@@ -2415,6 +2412,7 @@ GameObject:
   - component: {fileID: 1311944916}
   - component: {fileID: 1311944915}
   - component: {fileID: 1311944914}
+  - component: {fileID: 1311944917}
   m_Layer: 5
   m_Name: UpgradeButton
   m_TagString: Untagged
@@ -2485,7 +2483,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 74234905}
+      - m_Target: {fileID: 1311944917}
         m_MethodName: UpgradeButtonPressed
         m_Mode: 1
         m_Arguments:
@@ -2533,6 +2531,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1311944912}
   m_CullTransparentMesh: 0
+--- !u!114 &1311944917
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1311944912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 438e69012385e0c4e9388dcdb76849e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ImportantScripts: {fileID: 74234904}
+  CurrentSelectedObject: {fileID: 0}
 --- !u!1 &1346100404
 GameObject:
   m_ObjectHideFlags: 0
@@ -2902,7 +2914,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 40.6, y: 146}
+  m_AnchoredPosition: {x: 40.6, y: 134.6}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1597569206
@@ -3083,7 +3095,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 231.6, y: 119.09999}
+  m_AnchoredPosition: {x: 197.29999, y: 119.09999}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1655608139
@@ -3353,7 +3365,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Test
+  m_Text: Scout
 --- !u!222 &1765530677
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3451,6 +3463,16 @@ PrefabInstance:
       objectReference: {fileID: 1346100406}
     - target: {fileID: 1412209796375830970, guid: 0fa7f6a3bf6324447b99f05adb55a681,
         type: 3}
+      propertyPath: AttackText
+      value: 
+      objectReference: {fileID: 477510786}
+    - target: {fileID: 1412209796375830970, guid: 0fa7f6a3bf6324447b99f05adb55a681,
+        type: 3}
+      propertyPath: AtkSpeedText
+      value: 
+      objectReference: {fileID: 178671088}
+    - target: {fileID: 1412209796375830970, guid: 0fa7f6a3bf6324447b99f05adb55a681,
+        type: 3}
       propertyPath: CancelButton
       value: 
       objectReference: {fileID: 963465467}
@@ -3461,6 +3483,11 @@ PrefabInstance:
       objectReference: {fileID: 972176637}
     - target: {fileID: 1412209796375830970, guid: 0fa7f6a3bf6324447b99f05adb55a681,
         type: 3}
+      propertyPath: UpgradeButton
+      value: 
+      objectReference: {fileID: 1311944912}
+    - target: {fileID: 1412209796375830970, guid: 0fa7f6a3bf6324447b99f05adb55a681,
+        type: 3}
       propertyPath: UpgradeCanvas
       value: 
       objectReference: {fileID: 1655272715}
@@ -3468,8 +3495,12 @@ PrefabInstance:
         type: 3}
       propertyPath: selectedObject
       value: 
-      objectReference: {fileID: 7798818437578140048, guid: 639825fb17b6e1f438fb61df8984e4b2,
+      objectReference: {fileID: 691231945}
+    - target: {fileID: 1412209796375830970, guid: 0fa7f6a3bf6324447b99f05adb55a681,
         type: 3}
+      propertyPath: UpgradePriceText
+      value: 
+      objectReference: {fileID: 95200255}
     - target: {fileID: 1412209796375830971, guid: 0fa7f6a3bf6324447b99f05adb55a681,
         type: 3}
       propertyPath: m_Name

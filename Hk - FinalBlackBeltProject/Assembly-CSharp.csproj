@@ -62,6 +62,7 @@
     <Compile Include="Assets\Scripts\PlacementScript.cs" />
     <Compile Include="Assets\Scripts\RoundCount.cs" />
     <Compile Include="Assets\Scripts\TowerAttributes.cs" />
+    <Compile Include="Assets\Scripts\UpgradeTowers.cs" />
     <Compile Include="Assets\Scripts\ZombieScript.cs" />
   </ItemGroup>
   <ItemGroup>

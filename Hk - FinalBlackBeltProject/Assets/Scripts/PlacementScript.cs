@@ -31,7 +31,13 @@ public class PlacementScript : MonoBehaviour
     public int SellAmount;
     public Text SellPriceText;
     bool sellingTower;
-    bool ButtonClicked; 
+    bool ButtonClicked;
+
+    [Header("Tower Attribute Canvas")]
+    private TowerAttributes CurrentTowerAttribute; 
+    public Text AtkSpeedText;
+    public Text AttackText;
+    public Text UpgradePriceText;
 
     // Start is called before the first frame update
     void Start()
@@ -54,6 +60,10 @@ public class PlacementScript : MonoBehaviour
     {
         MoneyText.text = MoneyAmount.ToString();
 
+        CurrentTowerAttribute = selectedObject.GetComponent<TowerAttributes>();
+        AttackText.text = CurrentTowerAttribute.AttackAmount.ToString();
+        UpgradePriceText.text = CurrentTowerAttribute.UpgradeAmount.ToString();
+        AtkSpeedText.text = CurrentTowerAttribute.AttackSpeed.ToString();
 
         float distance;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);

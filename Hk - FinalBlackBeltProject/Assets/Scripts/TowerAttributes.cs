@@ -7,11 +7,8 @@ public class TowerAttributes : MonoBehaviour
 {
     [Header("TowerNumbers")]
     public int UpgradeAmount;
-    public Text UpgradePriceText;
     public int AttackAmount;
-    public Text AttackText;
     public float AttackSpeed;
-    public Text AtkSpeedText;
     public int Red = 0;
     public int Green = 255;
     public int Blue = 255; 
@@ -46,9 +43,8 @@ public class TowerAttributes : MonoBehaviour
         {
             ZombieScript = Enemy.GetComponent<ZombieScript>();
         }
-        AttackText.text = AttackAmount.ToString();
-        AtkSpeedText.text = AttackSpeed.ToString();
-        UpgradePriceText.text = UpgradeAmount.ToString(); 
+
+
 
         Targets = GameObject.FindGameObjectsWithTag("Enemy");
         float minDistance = 1000;
@@ -66,7 +62,7 @@ public class TowerAttributes : MonoBehaviour
 
     IEnumerator BulletAttacking()
     {
-        yield return new WaitForSeconds(4f); 
+        yield return new WaitForSeconds(4f);
         if (Enemy)
         {
             transform.LookAt(Enemy.transform.position);
@@ -75,19 +71,6 @@ public class TowerAttributes : MonoBehaviour
             ZombieScript.ZombieHitAnimationStart();
             yield return new WaitForSeconds(AttackSpeed);
             StartCoroutine(BulletAttacking());
-        }
-    }
-
-    public void UpgradeButtonPressed()
-    {
-        if (placementScript.MoneyAmount > UpgradeAmount)
-        {
-            AttackAmount += 5;
-            AttackSpeed -= 2;
-            placementScript.MoneyAmount -= UpgradeAmount;
-            UpgradeAmount += 200;
-            placementScript.selectedObject.GetComponent<Renderer>().material.color = new Color(Red,
-                Green -= 50, Blue -= 50);
         }
     }
 }
