@@ -27,15 +27,23 @@ public class UpgradeTowers : MonoBehaviour
         CurrentSelectedObject = placementScript.selectedObject;
         SpecificTowerAttributeOfSelectedObj = CurrentSelectedObject.GetComponent<TowerAttributes>(); 
 
-        if (placementScript.MoneyAmount > SpecificTowerAttributeOfSelectedObj.UpgradeAmount)
+        if (placementScript.MoneyAmount > SpecificTowerAttributeOfSelectedObj.UpgradeAmount && SpecificTowerAttributeOfSelectedObj.NumberOfUpgrades <=5)
         {
             Debug.Log("functionworks");
-            SpecificTowerAttributeOfSelectedObj.AttackAmount += 5;
-            SpecificTowerAttributeOfSelectedObj.AttackSpeed -= 2;
+            SpecificTowerAttributeOfSelectedObj.AttackAmount += 10;
+            SpecificTowerAttributeOfSelectedObj.AttackSpeed -= 1;
+            SpecificTowerAttributeOfSelectedObj.NumberOfUpgrades += 1;
+            SpecificTowerAttributeOfSelectedObj.TotalTime = SpecificTowerAttributeOfSelectedObj.WaitTime + SpecificTowerAttributeOfSelectedObj.AttackSpeed; 
             placementScript.MoneyAmount -= SpecificTowerAttributeOfSelectedObj.UpgradeAmount;
             SpecificTowerAttributeOfSelectedObj.UpgradeAmount += 200;
-            CurrentSelectedObject.GetComponent<Renderer>().material.color = new Color(SpecificTowerAttributeOfSelectedObj.Red -= 20,
-                SpecificTowerAttributeOfSelectedObj.Green -= 50, SpecificTowerAttributeOfSelectedObj.Blue -= 50);
+            CurrentSelectedObject.GetComponent<Renderer>().material.color = new Color(SpecificTowerAttributeOfSelectedObj.Red -= 50,
+            SpecificTowerAttributeOfSelectedObj.Green -= 50, SpecificTowerAttributeOfSelectedObj.Blue -= 50);
+            placementScript.AttackText.text = SpecificTowerAttributeOfSelectedObj.AttackAmount.ToString();
+            placementScript.UpgradePriceText.text = SpecificTowerAttributeOfSelectedObj.UpgradeAmount.ToString();
+            placementScript.AtkSpeedText.text = SpecificTowerAttributeOfSelectedObj.TotalTime.ToString();
+        } else if (SpecificTowerAttributeOfSelectedObj.NumberOfUpgrades > 5)
+        {
+            Destroy(gameObject); 
         }
     }
 }

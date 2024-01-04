@@ -7,8 +7,11 @@ public class TowerAttributes : MonoBehaviour
 {
     [Header("TowerNumbers")]
     public int UpgradeAmount;
+    public int NumberOfUpgrades; 
     public int AttackAmount;
     public float AttackSpeed;
+    public float WaitTime;
+    public float TotalTime; 
     public int Red = 0;
     public int Green = 255;
     public int Blue = 255; 
@@ -26,8 +29,11 @@ public class TowerAttributes : MonoBehaviour
     {
         placementScript = PlaceMentScript.GetComponent<PlacementScript>();
         AttackAmount = 10;
-        AttackSpeed = 10;
-        UpgradeAmount = 50; 
+        AttackSpeed = 6;
+        UpgradeAmount = 50;
+        NumberOfUpgrades = 0;
+        WaitTime = 4; 
+
         StartCoroutine(BulletAttacking());
         if (ZombieScript)
         {
@@ -44,7 +50,7 @@ public class TowerAttributes : MonoBehaviour
             ZombieScript = Enemy.GetComponent<ZombieScript>();
         }
 
-
+        TotalTime = WaitTime + AttackSpeed; 
 
         Targets = GameObject.FindGameObjectsWithTag("Enemy");
         float minDistance = 1000;
@@ -62,7 +68,7 @@ public class TowerAttributes : MonoBehaviour
 
     IEnumerator BulletAttacking()
     {
-        yield return new WaitForSeconds(4f);
+        yield return new WaitForSeconds(WaitTime);
         if (Enemy)
         {
             transform.LookAt(Enemy.transform.position);

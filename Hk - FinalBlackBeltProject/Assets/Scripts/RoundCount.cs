@@ -70,7 +70,7 @@ public class RoundCount : MonoBehaviour
             Invoke("StopNormalZombieSpawn", 10f);
             StartCoroutine(SpawnFastZombie());
             Invoke("StopFastZombieSpawn", 30f);
-            Invoke("Round3Finish", 30f);
+            Invoke("Round3Finish", 10f);
             RoundNumber = 3;
             RoundText.text = RoundNumber.ToString();
             NewRoundStarts = false;
@@ -79,8 +79,10 @@ public class RoundCount : MonoBehaviour
         if (WaveNumber == 4 && NewRoundStarts)
         {
             StartCoroutine(SpawnFastZombie());
-            Invoke("StopFastZombieSpawn", 40f);
-            Invoke("Round4Finish", 40f);
+            Invoke("StopFastZombieSpawn", 30f);
+            StartCoroutine(SpawnHeavyZombie());
+            Invoke("StopHeavyZombieSpawn", 10f);
+            Invoke("Round4Finish", 30f);
             RoundNumber = 4;
             RoundText.text = RoundNumber.ToString();
             NewRoundStarts = false;

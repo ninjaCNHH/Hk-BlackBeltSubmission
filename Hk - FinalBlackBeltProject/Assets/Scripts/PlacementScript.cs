@@ -60,11 +60,6 @@ public class PlacementScript : MonoBehaviour
     {
         MoneyText.text = MoneyAmount.ToString();
 
-        CurrentTowerAttribute = selectedObject.GetComponent<TowerAttributes>();
-        AttackText.text = CurrentTowerAttribute.AttackAmount.ToString();
-        UpgradePriceText.text = CurrentTowerAttribute.UpgradeAmount.ToString();
-        AtkSpeedText.text = CurrentTowerAttribute.AttackSpeed.ToString();
-
         float distance;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (plane.Raycast(ray, out distance))
@@ -93,7 +88,10 @@ public class PlacementScript : MonoBehaviour
                 selectedObject = hitData.transform.gameObject;
                 CancelButton.SetActive(true);
                 UpgradeCanvas.SetActive(true);
-
+                CurrentTowerAttribute = selectedObject.GetComponent<TowerAttributes>();
+                AttackText.text = CurrentTowerAttribute.AttackAmount.ToString();
+                UpgradePriceText.text = CurrentTowerAttribute.UpgradeAmount.ToString();
+                AtkSpeedText.text = CurrentTowerAttribute.TotalTime.ToString();
             }
         }
         else

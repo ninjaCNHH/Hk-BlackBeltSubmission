@@ -46,7 +46,7 @@ public class ZombieScript : MonoBehaviour
         if (Health <= 0)
         {
             GameObject.Find("Important Scripts").GetComponent<PlacementScript>().MoneyAmount += 50;
-            Instantiate(ZombieDeathAnimation, Zombie.transform.position, Zombie.transform.rotation); 
+            Instantiate(ZombieDeathAnimation, Zombie.transform.position, Zombie.transform.rotation);
             Destroy(gameObject);
         }
     }
@@ -57,7 +57,6 @@ public class ZombieScript : MonoBehaviour
     {
         ZombieDeathAnimation.transform.position = gameObject.transform.position;
         ZombieDeathAnimation.Play();
-
     }
 
     public void ZombieHitAnimationStart()

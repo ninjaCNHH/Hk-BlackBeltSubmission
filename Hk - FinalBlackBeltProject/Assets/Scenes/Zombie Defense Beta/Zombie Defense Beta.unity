@@ -1443,8 +1443,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UpgradeAmount: 0
+  NumberOfUpgrades: 0
   AttackAmount: 0
   AttackSpeed: 0
+  WaitTime: 0
+  TotalTime: 0
   Red: 0
   Green: 255
   Blue: 255
