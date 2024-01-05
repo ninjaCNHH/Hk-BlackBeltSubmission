@@ -25,16 +25,17 @@ public class TowerAttributes : MonoBehaviour
     
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         placementScript = PlaceMentScript.GetComponent<PlacementScript>();
         AttackAmount = 10;
         AttackSpeed = 6;
         UpgradeAmount = 50;
         NumberOfUpgrades = 0;
-        WaitTime = 4; 
+        WaitTime = 1; 
 
         StartCoroutine(BulletAttacking());
+
         if (ZombieScript)
         {
             ZombieScript.ZombieHitAnimation.Stop();
@@ -50,8 +51,11 @@ public class TowerAttributes : MonoBehaviour
             ZombieScript = Enemy.GetComponent<ZombieScript>();
         }
 
-        TotalTime = WaitTime + AttackSpeed; 
+        TotalTime = WaitTime + AttackSpeed;
+    }
 
+    IEnumerator BulletAttacking()
+    {
         Targets = GameObject.FindGameObjectsWithTag("Enemy");
         float minDistance = 1000;
         foreach (GameObject Targets in Targets)
@@ -60,16 +64,12 @@ public class TowerAttributes : MonoBehaviour
             if (TargetDistance < minDistance)
             {
                 minDistance = TargetDistance;
-                    Enemy = Targets; 
+                Enemy = Targets;
             }
         }
 
-    }
-
-    IEnumerator BulletAttacking()
-    {
         yield return new WaitForSeconds(WaitTime);
-        if (Enemy)
+        if (Enemy && gameObject.transform.position.x > -70 && gameObject.transform.position.z > -50)
         {
             transform.LookAt(Enemy.transform.position);
 
@@ -77,6 +77,11 @@ public class TowerAttributes : MonoBehaviour
             ZombieScript.ZombieHitAnimationStart();
             yield return new WaitForSeconds(AttackSpeed);
             StartCoroutine(BulletAttacking());
+        }
+
+        if (!Enemy)
+        {
+            StartCoroutine(BulletAttacking()); 
         }
     }
 }

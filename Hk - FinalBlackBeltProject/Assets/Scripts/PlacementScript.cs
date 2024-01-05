@@ -88,6 +88,7 @@ public class PlacementScript : MonoBehaviour
                 selectedObject = hitData.transform.gameObject;
                 CancelButton.SetActive(true);
                 UpgradeCanvas.SetActive(true);
+
                 CurrentTowerAttribute = selectedObject.GetComponent<TowerAttributes>();
                 AttackText.text = CurrentTowerAttribute.AttackAmount.ToString();
                 UpgradePriceText.text = CurrentTowerAttribute.UpgradeAmount.ToString();
