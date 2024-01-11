@@ -35,12 +35,37 @@ public class UpgradeTowers : MonoBehaviour
             SpecificTowerAttributeOfSelectedObj.NumberOfUpgrades += 1;
             SpecificTowerAttributeOfSelectedObj.TotalTime = SpecificTowerAttributeOfSelectedObj.WaitTime + SpecificTowerAttributeOfSelectedObj.AttackSpeed; 
             placementScript.MoneyAmount -= SpecificTowerAttributeOfSelectedObj.UpgradeAmount;
-            SpecificTowerAttributeOfSelectedObj.UpgradeAmount += 200;
+            SpecificTowerAttributeOfSelectedObj.UpgradeAmount += 250;
             CurrentSelectedObject.GetComponent<Renderer>().material.color = new Color(SpecificTowerAttributeOfSelectedObj.Red -= 50,
             SpecificTowerAttributeOfSelectedObj.Green -= 50, SpecificTowerAttributeOfSelectedObj.Blue -= 50);
             placementScript.AttackText.text = SpecificTowerAttributeOfSelectedObj.AttackAmount.ToString();
             placementScript.UpgradePriceText.text = SpecificTowerAttributeOfSelectedObj.UpgradeAmount.ToString();
             placementScript.AtkSpeedText.text = SpecificTowerAttributeOfSelectedObj.TotalTime.ToString();
+
+            if (SpecificTowerAttributeOfSelectedObj.NumberOfUpgrades == 1)
+            {
+                SpecificTowerAttributeOfSelectedObj.Upgrade1.SetActive(false);
+                SpecificTowerAttributeOfSelectedObj.Upgrade2.SetActive(true);
+                SpecificTowerAttributeOfSelectedObj.Upgrade3.SetActive(false);
+                SpecificTowerAttributeOfSelectedObj.Upgrade4.SetActive(false); 
+            }
+
+            if (SpecificTowerAttributeOfSelectedObj.NumberOfUpgrades == 2)
+            {
+                SpecificTowerAttributeOfSelectedObj.Upgrade1.SetActive(false);
+                SpecificTowerAttributeOfSelectedObj.Upgrade2.SetActive(false);
+                SpecificTowerAttributeOfSelectedObj.Upgrade3.SetActive(true);
+                SpecificTowerAttributeOfSelectedObj.Upgrade4.SetActive(false);
+            }
+
+            if (SpecificTowerAttributeOfSelectedObj.NumberOfUpgrades == 3)
+            {
+                SpecificTowerAttributeOfSelectedObj.Upgrade1.SetActive(false);
+                SpecificTowerAttributeOfSelectedObj.Upgrade2.SetActive(false);
+                SpecificTowerAttributeOfSelectedObj.Upgrade3.SetActive(false);
+                SpecificTowerAttributeOfSelectedObj.Upgrade4.SetActive(true);
+            }
+
         } else if (SpecificTowerAttributeOfSelectedObj.NumberOfUpgrades > 5)
         {
             Destroy(gameObject); 

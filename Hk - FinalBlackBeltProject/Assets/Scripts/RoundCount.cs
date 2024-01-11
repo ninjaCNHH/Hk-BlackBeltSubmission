@@ -6,10 +6,12 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
 using UnityEngine.VFX;
+using UnityEngine.SceneManagement; 
 
 public class RoundCount : MonoBehaviour
 {
     public ZombieScript ZombieScirpt;
+    public BaseHealth BaseHealth; 
     public GameObject FastZombie;
     public GameObject HeavyZombie;
     public GameObject MiniBoss;
@@ -43,6 +45,7 @@ public class RoundCount : MonoBehaviour
     {
         if (WaveNumber == 1 && NewRoundStarts)
         {
+            CorutineNormalZombieFinished = true; 
             StartCoroutine(SpawnNormalZombie());  
             Invoke("StopNormalZombieSpawn" , 20f); 
             Invoke("Round1Finish", 20f); 
@@ -53,11 +56,13 @@ public class RoundCount : MonoBehaviour
 
         if (WaveNumber == 2 && NewRoundStarts)
         {
+            CorutineNormalZombieFinished = true;
+            CorutineFastZombieFinished = true; 
             StartCoroutine(SpawnNormalZombie());
             Invoke("StopNormalZombieSpawn", 10f);
             StartCoroutine(SpawnFastZombie());
             Invoke("StopFastZombieSpawn", 20f); 
-            Invoke("Round2Finish", 20f); 
+            Invoke("Round2Finish", 25f); 
             RoundNumber = 2;
             RoundText.text = RoundNumber.ToString();
             NewRoundStarts= false;
@@ -66,11 +71,13 @@ public class RoundCount : MonoBehaviour
 
         if (WaveNumber == 3 && NewRoundStarts)
         {
+            CorutineNormalZombieFinished = true;
+            CorutineFastZombieFinished = true; 
             StartCoroutine(SpawnNormalZombie());
             Invoke("StopNormalZombieSpawn", 10f);
             StartCoroutine(SpawnFastZombie());
             Invoke("StopFastZombieSpawn", 30f);
-            Invoke("Round3Finish", 10f);
+            Invoke("Round3Finish", 31f);
             RoundNumber = 3;
             RoundText.text = RoundNumber.ToString();
             NewRoundStarts = false;
@@ -78,10 +85,12 @@ public class RoundCount : MonoBehaviour
 
         if (WaveNumber == 4 && NewRoundStarts)
         {
+            CorutineFastZombieFinished = true;
+            CorutineHeavyZombieFinished = true; 
             StartCoroutine(SpawnFastZombie());
             Invoke("StopFastZombieSpawn", 30f);
             StartCoroutine(SpawnHeavyZombie());
-            Invoke("StopHeavyZombieSpawn", 10f);
+            Invoke("StopHeavyZombieSpawn", 15f);
             Invoke("Round4Finish", 30f);
             RoundNumber = 4;
             RoundText.text = RoundNumber.ToString();
@@ -90,6 +99,8 @@ public class RoundCount : MonoBehaviour
 
         if (WaveNumber == 5 && NewRoundStarts)
         {
+            CorutineFastZombieFinished = true;
+            CorutineHeavyZombieFinished = true; 
             StartCoroutine(SpawnFastZombie()); 
             Invoke("StopFastZombieSpawn", 10f);  
             StartCoroutine(SpawnHeavyZombie()); 
@@ -102,7 +113,8 @@ public class RoundCount : MonoBehaviour
 
         if (WaveNumber == 6 && NewRoundStarts)
         {
-
+            CorutineFastZombieFinished = true;
+            CourtineMiniBossFinished = true;  
             StartCoroutine(SpawnFastZombie());
             Invoke("StopFastZombieSpawn", 30f);
             StartCoroutine(SpawnMiniBoss());
@@ -115,6 +127,9 @@ public class RoundCount : MonoBehaviour
 
         if (WaveNumber == 7 && NewRoundStarts)
         {
+            CorutineHeavyZombieFinished = true;
+            CorutineFastZombieFinished = true;
+            CourtineMiniBossFinished = true; 
             StartCoroutine(SpawnHeavyZombie());
             Invoke("StopHeavyZombieSpawn", 20f);
             StartCoroutine(SpawnFastZombie());
@@ -129,10 +144,12 @@ public class RoundCount : MonoBehaviour
 
         if (WaveNumber == 8 && NewRoundStarts)
         {
+            CourtineMiniBossFinished = true;
+            CourtineFastHeavyFinished = true; 
             StartCoroutine(SpawnMiniBoss());
             Invoke("StopMiniBossSpawn", 10f);
             StartCoroutine(SpawnFastHeavy());
-            Invoke("StopFastHeavySpawn", 20f);
+            Invoke("StopFastHeavySpawn", 15f);
             Invoke("Round8Finish", 30f);
             RoundNumber = 8;
             RoundText.text = RoundNumber.ToString();
@@ -141,6 +158,8 @@ public class RoundCount : MonoBehaviour
 
         if (WaveNumber == 9 && NewRoundStarts)
         {
+            CourtineMiniBossFinished = true;
+            CourtineFastHeavyFinished = true; 
             StartCoroutine(SpawnMiniBoss());
             Invoke("StopMiniBossSpawn", 15f);
             StartCoroutine(SpawnFastHeavy());
@@ -153,13 +172,16 @@ public class RoundCount : MonoBehaviour
 
         if (WaveNumber == 10 && NewRoundStarts)
         {
+            CourtineFastHeavyFinished = true;
+            CourtineMiniBossFinished = true;
+            CorutineBigBossFinished = true; 
             StartCoroutine(SpawnMiniBoss());
             Invoke("StopMiniBossSpawn", 15f);
             StartCoroutine(SpawnBigBoss());
             Invoke("StopBigBossSpawn", 2f);
             StartCoroutine(SpawnFastHeavy());
             Invoke("StopFastHeavySpawn", 20f);
-            Invoke("Round10Finish", 30f);
+            Invoke("Round10Finish", 40f);
             RoundNumber = 10;
             RoundText.text = RoundNumber.ToString();
             NewRoundStarts = false;
@@ -170,8 +192,13 @@ public class RoundCount : MonoBehaviour
     { 
         yield return new WaitForSeconds(2f);
         Instantiate(ZombieScirpt.Zombie, OriginalSpawnLocation, Quaternion.identity);
+        Debug.Log("Spawned Normal");
+        Debug.Log("Before: " + CorutineNormalZombieFinished);
+
         if (CorutineNormalZombieFinished == true)
         {
+            Debug.Log("After: " + CorutineNormalZombieFinished);
+            Debug.Log("Restarting Coroutine");
            StartCoroutine(SpawnNormalZombie());
         }
     }
@@ -180,6 +207,7 @@ public class RoundCount : MonoBehaviour
     {
         yield return new WaitForSeconds(2f);
         Instantiate(FastZombie, OriginalSpawnLocation, Quaternion.identity);
+        Debug.Log("Spawned Fast");
         if (CorutineFastZombieFinished == true)
         {
             StartCoroutine(SpawnFastZombie());
@@ -190,6 +218,7 @@ public class RoundCount : MonoBehaviour
     {
         yield return new WaitForSeconds(2f);
         Instantiate(HeavyZombie, OriginalSpawnLocation, Quaternion.identity);
+        Debug.Log("Spawned Heavy");
         if (CorutineHeavyZombieFinished == true)
         {
             StartCoroutine(SpawnHeavyZombie());
@@ -229,17 +258,19 @@ public class RoundCount : MonoBehaviour
     public void StopNormalZombieSpawn()
     {
         CorutineNormalZombieFinished = false;
-
+        Debug.Log("Stopped Normal");
     }  
     
     public void StopFastZombieSpawn()
     {
         CorutineFastZombieFinished = false;
+        Debug.Log("Stopped Fast");
     }
 
     public void StopHeavyZombieSpawn()
     {
         CorutineHeavyZombieFinished = false;
+        Debug.Log("Stopped Heavy");
     }
 
     public void StopMiniBossSpawn()
@@ -313,7 +344,9 @@ public class RoundCount : MonoBehaviour
 
     public void Round10Finish()
     {
-        WaveNumber = 11;
-        NewRoundStarts = true;
+        if (BaseHealth.AllyHealth >= 0)
+        {
+            SceneManager.LoadScene(3);
+        }
     }
 }

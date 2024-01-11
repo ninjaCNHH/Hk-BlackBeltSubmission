@@ -32,6 +32,7 @@ public class PlacementScript : MonoBehaviour
     public Text SellPriceText;
     bool sellingTower;
     bool ButtonClicked;
+    public int NumberOfTowers; 
 
     [Header("Tower Attribute Canvas")]
     private TowerAttributes CurrentTowerAttribute; 
@@ -76,7 +77,7 @@ public class PlacementScript : MonoBehaviour
                 ClonedTower = Instantiate(TowerSelectedForPlacement, WorldPosition, Quaternion.identity);
                 TowerPlaced = false;
                 ButtonClicked = true; 
-
+                
             }
         }
 
@@ -109,10 +110,11 @@ public class PlacementScript : MonoBehaviour
     public void ButtonPressed()
     {
         TowerPlaced = true;
-        if (TowerPlaced && MoneyAmount >= 100 && ButtonClicked)
+        if (TowerPlaced && MoneyAmount >= 100 && ButtonClicked && NumberOfTowers <= 15)
         {
             TowerSelectedForPlacement = Tower1;
             MoneyAmount -= 100;
+            NumberOfTowers += 1; 
             MoneyText.text = MoneyAmount.ToString();
             ButtonClicked = false; 
         }

@@ -61,8 +61,8 @@ public class ZombieScript : MonoBehaviour
 
     public void ZombieHitAnimationStart()
     {
-        ZombieHitAnimation.transform.position = gameObject.transform.position;
-        ZombieHitAnimation.Play();
-
+            Debug.Log("play hit");
+            ZombieHitAnimation.transform.position = gameObject.transform.position;
+            ZombieHitAnimation.Play();
     }
 }

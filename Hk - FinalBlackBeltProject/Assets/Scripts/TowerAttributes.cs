@@ -22,6 +22,12 @@ public class TowerAttributes : MonoBehaviour
     public GameObject PlaceMentScript; 
     private PlacementScript placementScript;
     public ZombieScript ZombieScript;
+
+    [Header("Upgrades")]
+    public GameObject Upgrade1;
+    public GameObject Upgrade2;
+    public GameObject Upgrade3;
+    public GameObject Upgrade4; 
     
 
     // Start is called before the first frame update
@@ -32,7 +38,11 @@ public class TowerAttributes : MonoBehaviour
         AttackSpeed = 6;
         UpgradeAmount = 50;
         NumberOfUpgrades = 0;
-        WaitTime = 1; 
+        WaitTime = 1;
+        Upgrade1.SetActive(true);
+        Upgrade2.SetActive(false);
+        Upgrade3.SetActive(false);
+        Upgrade4.SetActive(false); 
 
         StartCoroutine(BulletAttacking());
 
@@ -68,11 +78,11 @@ public class TowerAttributes : MonoBehaviour
             }
         }
 
+
         yield return new WaitForSeconds(WaitTime);
         if (Enemy && gameObject.transform.position.x > -70 && gameObject.transform.position.z > -50)
         {
             transform.LookAt(Enemy.transform.position);
-
             ZombieScript.Health -= AttackAmount;
             ZombieScript.ZombieHitAnimationStart();
             yield return new WaitForSeconds(AttackSpeed);

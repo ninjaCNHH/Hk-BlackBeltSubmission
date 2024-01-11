@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Zombie Defense Beta/LoseScreen.unity
     guid: c2b8ef20aeb5e4f46b533cfb4ff2ee35
+  - enabled: 1
+    path: Assets/Scenes/Zombie Defense Beta/Win Screen.unity
+    guid: 048afc5855a04c24dbb1f054135c70f7
   m_configObjects: {}
