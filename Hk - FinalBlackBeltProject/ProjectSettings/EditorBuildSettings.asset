@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Zombie Defense Beta/Win Screen.unity
     guid: 048afc5855a04c24dbb1f054135c70f7
+  - enabled: 1
+    path: Assets/Scenes/Zombie Defense Beta/Credits.unity
+    guid: 749a1bdca4463be44a94cbbc15bde449
   m_configObjects: {}

@@ -54,7 +54,7 @@ public class TowerAttributes : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (Enemy)
         {
