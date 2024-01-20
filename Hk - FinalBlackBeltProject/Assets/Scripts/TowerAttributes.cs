@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -22,6 +22,7 @@ public class TowerAttributes : MonoBehaviour
     public GameObject PlaceMentScript; 
     private PlacementScript placementScript;
     public ZombieScript ZombieScript;
+    public ParticleSystem EnemyHit;
 
     [Header("Upgrades")]
     public GameObject Upgrade1;
@@ -38,7 +39,7 @@ public class TowerAttributes : MonoBehaviour
         AttackSpeed = 6;
         UpgradeAmount = 50;
         NumberOfUpgrades = 0;
-        WaitTime = 1;
+        WaitTime = 1.5f;
         Upgrade1.SetActive(true);
         Upgrade2.SetActive(false);
         Upgrade3.SetActive(false);
@@ -84,7 +85,11 @@ public class TowerAttributes : MonoBehaviour
         {
             transform.LookAt(Enemy.transform.position);
             ZombieScript.Health -= AttackAmount;
-            ZombieScript.ZombieHitAnimationStart();
+            if (placementScript.NumberofParticles <= 20)
+            {
+                Instantiate(EnemyHit, Enemy.transform.position, Enemy.transform.rotation);
+                placementScript.NumberofParticles += 1;
+            }
             yield return new WaitForSeconds(AttackSpeed);
             StartCoroutine(BulletAttacking());
         }

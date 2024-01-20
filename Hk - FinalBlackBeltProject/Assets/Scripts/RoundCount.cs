@@ -1,4 +1,4 @@
-﻿using JetBrains.Annotations;
+using JetBrains.Annotations;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -181,7 +181,7 @@ public class RoundCount : MonoBehaviour
             Invoke("StopBigBossSpawn", 2f);
             StartCoroutine(SpawnFastHeavy());
             Invoke("StopFastHeavySpawn", 20f);
-            Invoke("Round10Finish", 40f);
+            Invoke("Round10Finish", 25f);
             RoundNumber = 10;
             RoundText.text = RoundNumber.ToString();
             NewRoundStarts = false;

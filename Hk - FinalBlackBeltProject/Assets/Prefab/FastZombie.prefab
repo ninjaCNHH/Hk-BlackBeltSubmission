@@ -127,7 +127,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Zombie: {fileID: 3304577220902168935}
-  Health: 20
+  Health: 10
   Defence: 0
   Speed: 8
   AngularSpeed: 250

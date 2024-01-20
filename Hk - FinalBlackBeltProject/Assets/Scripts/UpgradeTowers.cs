@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI; 
@@ -35,7 +35,7 @@ public class UpgradeTowers : MonoBehaviour
             SpecificTowerAttributeOfSelectedObj.NumberOfUpgrades += 1;
             SpecificTowerAttributeOfSelectedObj.TotalTime = SpecificTowerAttributeOfSelectedObj.WaitTime + SpecificTowerAttributeOfSelectedObj.AttackSpeed; 
             placementScript.MoneyAmount -= SpecificTowerAttributeOfSelectedObj.UpgradeAmount;
-            SpecificTowerAttributeOfSelectedObj.UpgradeAmount += 250;
+            SpecificTowerAttributeOfSelectedObj.UpgradeAmount += 400;
             CurrentSelectedObject.GetComponent<Renderer>().material.color = new Color(SpecificTowerAttributeOfSelectedObj.Red -= 50,
             SpecificTowerAttributeOfSelectedObj.Green -= 50, SpecificTowerAttributeOfSelectedObj.Blue -= 50);
             placementScript.AttackText.text = SpecificTowerAttributeOfSelectedObj.AttackAmount.ToString();
